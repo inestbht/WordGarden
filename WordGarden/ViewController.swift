@@ -148,16 +148,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func playAgainButtonPressed(_ sender: UIButton) {
-        // hide playAgainButton
-        // enable letterGuessedTextField
-        // disable guessALetterButton - it already is, though
-        // currentWord should be set to next word
-        // set wordBeingRevealed.text to underscores separated by spaces
-        // set wrongGuessesRemaining to maxNumberOfWrongGuesses
-        // set guessCount = 0
-        // set flowerImageView to flower8
-        // clear out lettersGuessed, so new word restarts with no letters guessed, or = ""
-        // set gameStatusMessageLabel.text to "You've Made Zero Guesses"
+        // if all words have been guessed and you select playAgain, then restart all games as if the app has been restarted
+        if currentWordIndex == wordToGuess.count {
+            currentWordIndex = 0
+            wordsGuessedCount = 0
+            wordsMissedCount = 0
+        }
         
         playAgainButton.isHidden = true
         guessedLetterField.isEnabled = true
@@ -169,6 +165,7 @@ class ViewController: UIViewController {
         guessCount = 0
         flowerImageView.image = UIImage(named: "flower\(maxNumberOfWrongGuesses)")
         lettersGuessed = ""
+        updateGameStatusLabels()
         gameStatusMessageLabel.text = "You've Made Zero Guesses"
     }
     
